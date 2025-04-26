@@ -1,0 +1,22 @@
+
+{
+  "name": "formula1-api",
+  "version": "1.0.0",
+  "description": "API de Pilotos de Fórmula 1 utilizando Node.js, Fastify e TypeScript.",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": ["nodejs", "fastify", "typescript", "formula1", "api"],
+  "author": "Gabriel Lafis",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.0.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  }
+}
