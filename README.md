@@ -59,7 +59,7 @@ Servidor rodando em: `http://localhost:3333`
 
 ## 📝 Inspiração
 
-Projeto feito por mim e inspirado no desafio prático da DIO:  
+Projeto inspirado no desafio prático da DIO:  
 [https://github.com/digitalinnovationone/node-formula-1](https://github.com/digitalinnovationone/node-formula-1)
 
 ---
