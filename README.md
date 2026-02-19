@@ -1,6 +1,17 @@
 
 # 🏎️ API de Pilotos de Fórmula 1 — Node.js + Fastify + TypeScript
 
+<div align="center">
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+</div>
+
+
 **Construa sua própria escuderia de Fórmula 1!**
 Este projeto cria uma API leve, rápida e eficiente utilizando Node.js, Fastify e TypeScript, com armazenamento em memória e estrutura pronta para evoluir com banco de dados real.
 
@@ -237,3 +248,32 @@ Server running at: `http://localhost:3333`
 ## 📄 License
 
 MIT License — feel free to use, modify, and distribute.
+
+
+---
+
+## English
+
+### Overview
+
+🏎️ API de Pilotos de Fórmula 1 — Node.js + Fastify + TypeScript - A project built with JavaScript, TypeScript, Java, SQL, Node.js, developed by Gabriel Demetrios Lafis as part of professional portfolio and continuous learning in Data Science and Software Engineering.
+
+### Key Features
+
+This project demonstrates practical application of modern development concepts including clean code architecture, responsive design patterns, and industry-standard best practices. The implementation showcases real-world problem solving with production-ready code quality.
+
+### How to Run
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/galafis/Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify.git
+   ```
+2. Follow the setup instructions in the Portuguese section above.
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+Developed by [Gabriel Demetrios Lafis](https://github.com/galafis)
