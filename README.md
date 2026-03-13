@@ -1,254 +1,13 @@
+# Formula 1 Minimal API - Node.js + Fastify
 
-# 🏎️ API de Pilotos de Fórmula 1 — Node.js + Fastify + TypeScript
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg?logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Fastify](https://img.shields.io/badge/Fastify-4.x-000000.svg?logo=fastify&logoColor=white)](https://fastify.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](Dockerfile)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](Dockerfile)
 
-<div align="center">
-
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
-</div>
-
-
-**Construa sua própria escuderia de Fórmula 1!**
-Este projeto cria uma API leve, rápida e eficiente utilizando Node.js, Fastify e TypeScript, com armazenamento em memória e estrutura pronta para evoluir com banco de dados real.
-
----
-
-## 🏗️ Arquitetura da API
-
-```mermaid
-graph TD
-    Client["🖥️ Cliente (REST Client / Browser)"]
-    Fastify["⚡ Fastify Server\n(Node.js + TypeScript)"]
-    Router["🔀 Router / Routes"]
-    Handler["📦 Route Handlers"]
-    Store["🗄️ In-Memory Store\n(drivers[ ])"]
-
-    Client -->|"HTTP Request"| Fastify
-    Fastify --> Router
-    Router -->|"POST /drivers"| Handler
-    Router -->|"GET /drivers"| Handler
-    Router -->|"GET /drivers/:id"| Handler
-    Router -->|"PUT /drivers/:id"| Handler
-    Router -->|"DELETE /drivers/:id"| Handler
-    Handler <-->|"Read / Write"| Store
-    Handler -->|"HTTP Response (JSON)"| Client
-```
-
----
-
-## 🔄 Fluxo de Requisições
-
-```mermaid
-sequenceDiagram
-    participant C as Cliente
-    participant F as Fastify
-    participant H as Handler
-    participant S as Store (Memória)
-
-    C->>F: POST /drivers { name, team, points }
-    F->>H: Valida corpo da requisição
-    H->>S: Insere novo piloto com UUID
-    S-->>H: Piloto criado
-    H-->>C: 201 Created { id, name, team, points }
-
-    C->>F: GET /drivers
-    F->>H: Rota sem parâmetros
-    H->>S: Busca todos os pilotos
-    S-->>H: Array de pilotos
-    H-->>C: 200 OK [ { id, name, team, points }, ... ]
-
-    C->>F: PUT /drivers/:id { points: 25 }
-    F->>H: Extrai parâmetro :id
-    H->>S: Localiza e atualiza piloto
-    S-->>H: Piloto atualizado
-    H-->>C: 200 OK { id, name, team, points }
-
-    C->>F: DELETE /drivers/:id
-    F->>H: Extrai parâmetro :id
-    H->>S: Remove piloto do array
-    S-->>H: Confirmação
-    H-->>C: 204 No Content
-```
-
----
-
-## 🚀 Como Rodar o Projeto
-
-1. Clone o repositório ou baixe o ZIP.
-2. No terminal, entre na pasta do projeto.
-3. Instale as dependências:
-   ```bash
-   npm install
-   ```
-4. Para rodar em modo desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-5. Para rodar em produção:
-   ```bash
-   npm run build
-   npm start
-   ```
-
-Servidor rodando em: `http://localhost:3333`
-
----
-
-## 🎯 Endpoints da API
-
-| Método | Rota              | Descrição                  |
-|--------|-------------------|----------------------------|
-| POST   | `/drivers`        | Criar novo piloto           |
-| GET    | `/drivers`        | Listar todos os pilotos     |
-| GET    | `/drivers/:id`    | Buscar piloto por ID        |
-| PUT    | `/drivers/:id`    | Atualizar piloto existente  |
-| DELETE | `/drivers/:id`    | Remover piloto              |
-
-### Exemplo de Payload (POST / PUT)
-
-```json
-{
-  "name": "Max Verstappen",
-  "team": "Red Bull Racing",
-  "points": 575
-}
-```
-
-### Exemplo de Resposta
-
-```json
-{
-  "id": "a1b2c3d4-...",
-  "name": "Max Verstappen",
-  "team": "Red Bull Racing",
-  "points": 575
-}
-```
-
----
-
-## 🛠️ Tecnologias Usadas
-
-| Tecnologia       | Versão    | Função                          |
-|------------------|-----------|---------------------------------|
-| Node.js          | 18+       | Runtime JavaScript              |
-| Fastify          | 4.x       | Framework HTTP de alta performance |
-| TypeScript       | 5.x       | Tipagem estática                |
-| ts-node-dev      | latest    | Hot reload em desenvolvimento   |
-
----
-
-## ✨ Melhorias Futuras
-
-- Implementar banco de dados real (MongoDB ou PostgreSQL).
-- Usar ORM como Prisma ou TypeORM.
-- Implementar autenticação JWT.
-- Adicionar paginação de resultados.
-- Adicionar validação de schema com Zod.
-- Melhorar a análise de dados dos pilotos com estatísticas.
-
-*Os pontos de expansão estão comentados no código para facilitar futuras integrações.*
-
----
-
-## 📝 Inspiração
-
-Projeto inspirado no desafio prático da DIO:
-[https://github.com/digitalinnovationone/node-formula-1](https://github.com/digitalinnovationone/node-formula-1)
-
----
-
-## 📄 Licença
-
-MIT License — sinta-se livre para usar, modificar e distribuir.
-
----
-
----
-
-# 🏎️ Formula 1 Drivers API — Node.js + Fastify + TypeScript
-
-**Build your own Formula 1 team!**
-This project delivers a lightweight, fast, and efficient API using Node.js, Fastify, and TypeScript, with in-memory storage and a structure ready to evolve with a real database.
-
----
-
-## 🏗️ API Architecture
-
-```mermaid
-graph LR
-    subgraph Client Side
-        REST["REST Client / Browser"]
-    end
-    subgraph Server Side
-        Fastify["⚡ Fastify Server"]
-        Router["🔀 Route Layer"]
-        Handlers["📦 Handlers"]
-        Store["🗄️ In-Memory Store"]
-    end
-
-    REST -->|HTTP| Fastify
-    Fastify --> Router
-    Router --> Handlers
-    Handlers <--> Store
-    Handlers -->|JSON Response| REST
-```
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repository or download the ZIP.
-2. Navigate to the project folder.
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Run in development mode:
-   ```bash
-   npm run dev
-   ```
-5. Run in production:
-   ```bash
-   npm run build
-   npm start
-   ```
-
-Server running at: `http://localhost:3333`
-
----
-
-## 🎯 API Endpoints
-
-| Method | Route             | Description              |
-|--------|-------------------|--------------------------|
-| POST   | `/drivers`        | Create a new driver       |
-| GET    | `/drivers`        | List all drivers          |
-| GET    | `/drivers/:id`    | Get driver by ID          |
-| PUT    | `/drivers/:id`    | Update existing driver    |
-| DELETE | `/drivers/:id`    | Remove a driver           |
-
----
-
-## 🛠️ Tech Stack
-
-| Technology   | Role                        |
-|--------------|-----------------------------|
-| Node.js      | JavaScript runtime          |
-| Fastify      | High-performance HTTP framework |
-| TypeScript   | Static typing               |
-| ts-node-dev  | Hot reload for development  |
-
----
-
-## 📄 License
-
-MIT License — feel free to use, modify, and distribute.
-
+[English](#english) | [Portugues (BR)](#portugues-br)
 
 ---
 
@@ -256,24 +15,119 @@ MIT License — feel free to use, modify, and distribute.
 
 ### Overview
 
-🏎️ API de Pilotos de Fórmula 1 — Node.js + Fastify + TypeScript - A project built with JavaScript, TypeScript, Java, SQL, Node.js, developed by Gabriel Demetrios Lafis as part of professional portfolio and continuous learning in Data Science and Software Engineering.
+Minimal REST API for Formula 1 driver data built with Node.js, Fastify, and TypeScript. Features high-performance HTTP endpoints for querying driver information, team standings, and race statistics using Fastify's low-overhead architecture. Developed as part of a DIO bootcamp challenge.
+
+### Architecture
+
+```mermaid
+graph TB
+    subgraph Client["Client"]
+        A[HTTP Request]
+    end
+    subgraph Server["Fastify Server"]
+        B[Route Handler]
+        C[Schema Validation]
+        D[Controller]
+    end
+    subgraph Data["Data Layer"]
+        E[Driver Repository]
+    end
+    A --> B --> C --> D --> E
+    style Client fill:#e3f2fd
+    style Server fill:#e8f5e9
+    style Data fill:#f3e5f5
+```
 
 ### Key Features
 
-This project demonstrates practical application of modern development concepts including clean code architecture, responsive design patterns, and industry-standard best practices. The implementation showcases real-world problem solving with production-ready code quality.
+- **Driver Data API** -- Query F1 driver information including teams, points, and rankings
+- **Fastify Performance** -- Low-overhead HTTP framework with schema-based validation
+- **TypeScript Safety** -- Full type coverage for request/response handling
+- **Schema Validation** -- JSON Schema validation for all API inputs
+- **RESTful Endpoints** -- Clean REST API design following HTTP standards
+- **Minimal Architecture** -- Lightweight API focused on performance and simplicity
 
-### How to Run
+### Industry Application
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/galafis/Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify.git
-   ```
-2. Follow the setup instructions in the Portuguese section above.
+This project demonstrates high-performance API design patterns applicable to sports data platforms, real-time statistics services, and content delivery APIs. Fastify's low-latency architecture is ideal for fintech tickers, IoT data ingestion, and gaming leaderboard services.
+
+### Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **TypeScript 5.0+** | Type-safe application logic |
+| **Node.js** | Runtime environment |
+| **Fastify** | High-performance HTTP framework |
+| **Docker** | Containerized deployment |
+
+### Quick Start
+
+```bash
+git clone https://github.com/galafis/Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify.git
+cd Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify
+npm install
+npm run dev
+```
+
+### Docker
+
+```bash
+docker build -t f1-api .
+docker run -p 3000:3000 f1-api
+```
+
+### Project Structure
+
+```
+Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify/
+├── src/
+├── examples/
+├── Dockerfile
+├── package.json
+├── tsconfig.json
+└── LICENSE
+```
 
 ### License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Author
+
+**Gabriel Demetrios Lafis**
+- GitHub: [@galafis](https://github.com/galafis)
+- LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
 
 ---
 
-Developed by [Gabriel Demetrios Lafis](https://github.com/galafis)
+## Portugues (BR)
+
+### Visao Geral
+
+API REST minimalista para dados de pilotos de Formula 1 construida com Node.js, Fastify e TypeScript. Apresenta endpoints HTTP de alto desempenho para consulta de informacoes de pilotos, classificacoes de equipes e estatisticas de corridas usando a arquitetura de baixa sobrecarga do Fastify. Desenvolvida como parte de um desafio do bootcamp DIO.
+
+### Principais Funcionalidades
+
+- **API de Dados de Pilotos** -- Consulta de informacoes de pilotos de F1 incluindo equipes, pontos e classificacoes
+- **Performance Fastify** -- Framework HTTP de baixa sobrecarga com validacao baseada em schema
+- **Seguranca TypeScript** -- Cobertura completa de tipos para manipulacao de request/response
+- **Endpoints RESTful** -- Design de API REST limpo seguindo padroes HTTP
+
+### Inicio Rapido
+
+```bash
+git clone https://github.com/galafis/Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify.git
+cd Criando-uma-Minimal-API-da-Formula-1-com-Node.js-e-Fastify
+npm install
+npm run dev
+```
+
+### Licenca
+
+Este projeto esta licenciado sob a Licenca MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+### Autor
+
+**Gabriel Demetrios Lafis**
+- GitHub: [@galafis](https://github.com/galafis)
+- LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
